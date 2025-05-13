@@ -1,0 +1,5 @@
+CANVAS_WIDTH = 400
+CANVAS_HEIGHT = 300
+
+TEST_DURATION = 60
+WORD_FONT = ("Courier", 15, "bold")
