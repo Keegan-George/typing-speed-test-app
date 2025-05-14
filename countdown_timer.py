@@ -3,14 +3,16 @@ from tkinter import Tk, Label
 
 
 class CountdownTimer:
+    """
+    Track and display the remaining time in the speed test.
+    """
+
     def __init__(self, count: int, window: Tk, timer_label: Label):
         self.count = count
         self.window = window
         self.timer_label = timer_label
-        self.time_remaining = None
         self.elapsed_time = None
         self.after_id = None
-        
 
     def tick(self):
         if self.count < 0:
