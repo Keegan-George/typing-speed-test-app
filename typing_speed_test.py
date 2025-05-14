@@ -1,6 +1,7 @@
 from config import *
 from tkinter import *
 from random import choice
+from countdown_timer import CountdownTimer
 
 
 class TypingSpeedTest:
@@ -16,7 +17,7 @@ class TypingSpeedTest:
         # create a list of words
         with open("words.txt") as words_file:
             self.words = words_file.read().split()
-        
+
         self.current_word = choice(self.words)
 
         # ui widgets
@@ -42,8 +43,12 @@ class TypingSpeedTest:
         self.canvas.grid(row=1, column=0, pady=10, columnspan=3)
         self.input.grid(row=2, column=0, columnspan=3)
 
+        ##new##
+        self.new_timer = CountdownTimer(TEST_DURATION, self.window, self.timer_label)
+
         # key bindings
-        self.window.bind("<Key>", lambda event: self.countdown_timer(TEST_DURATION))
+        # self.window.bind("<Key>", lambda event: self.countdown_timer(TEST_DURATION))
+        self.window.bind("<Key>", self.new_timer.start)
         self.window.bind("<space>", self.update_status_and_get_next_word)
 
         self.canvas_text = self.canvas.create_text(
@@ -56,23 +61,6 @@ class TypingSpeedTest:
         self.input.focus()
 
         self.window.mainloop()
-
-    def countdown_timer(self, count: int):
-        # unbind to prevent timer from starting when a key is pressed
-        self.window.unbind("<Key>")
-
-        if count < 0:
-            self.window.after_cancel(self.timer)
-            self.input.config(state="disabled")
-            self.window.unbind("<space>")
-
-        else:
-            min = count // 60
-            sec = count % 60
-            self.timer_label.config(text=f"{min:02d}:{sec:02d}")
-            self.timer = self.window.after(1000, self.countdown_timer, count - 1)
-
-        self.elapsed_time = TEST_DURATION - count
 
     def next_word(self, event):
         self.current_word = choice(self.words)
@@ -91,9 +79,10 @@ class TypingSpeedTest:
             # reference to image to prevent garbage collection
             self.status_label.image = self.red_X
 
-        if self.elapsed_time:
+        # if self.elapsed_time:
+        if self.new_timer.elapsed_time:
             self.wpm_label.config(
-                text=f"wpm: {int(self.correct_words/self.elapsed_time * 60)}"
+                text=f"wpm: {int(self.correct_words/self.new_timer.elapsed_time * 60)}"
             )
 
     def update_status_and_get_next_word(self, event):
