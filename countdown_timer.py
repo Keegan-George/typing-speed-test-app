@@ -7,17 +7,17 @@ class CountdownTimer:
     Track and display the remaining time in the speed test.
     """
 
-    def __init__(self, count: int, window: Tk, timer_label: Label):
-        self.count = count
-        self.window = window
+    def __init__(self, root: Tk, timer_label: Label):
+        self.count = TEST_DURATION
+        self.root = root
         self.timer_label = timer_label
         self.elapsed_time = None
         self.after_id = None
 
     def tick(self):
         if self.count < 0:
-            self.window.unbind("<space>")
-            self.window.after_cancel(self.after_id)
+            self.root.unbind("<space>")
+            self.root.after_cancel(self.after_id)
 
         else:
             self.min = self.count // 60
@@ -25,8 +25,8 @@ class CountdownTimer:
             self.timer_label.config(text=f"{self.min:02d}:{self.sec:02d}")
             self.count -= 1
             self.elapsed_time = TEST_DURATION - self.count
-            self.after_id = self.window.after(1000, self.tick)
+            self.after_id = self.root.after(1000, self.tick)
 
     def start(self, _event=None):
-        self.window.unbind("<Key>")
+        self.root.unbind("<Key>")
         self.tick()
