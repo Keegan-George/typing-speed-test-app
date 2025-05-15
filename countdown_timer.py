@@ -11,7 +11,7 @@ class CountdownTimer:
         self.count = TEST_DURATION
         self.root = root
         self.timer_label = timer_label
-        self.elapsed_time = None
+        self.elapsed_time = 0
         self.after_id = None
 
     def tick(self):

@@ -17,7 +17,9 @@ class TypingSpeedTest:
         self.window.bind("<space>", self.update_status_and_get_next_word)
 
         self.correct_words = 0
+
         self.next_word()
+
         self.window.mainloop()
 
     def next_word(self, _event=None):
@@ -27,15 +29,17 @@ class TypingSpeedTest:
     def update_status(self, _event=None):
         if self.word_bank.current_word == self.ui.input.get()[:-1]:
             self.correct_words += 1
-            self.ui.status_label.config(image=self.ui.green_check)
+            self.ui.display_success()
 
         else:
-            self.ui.status_label.config(image=self.ui.red_X)
+            self.ui.display_fail()
 
-        if self.timer.elapsed_time:
-            self.ui.wpm_label.config(
-                text=f"wpm: {int(self.correct_words/self.timer.elapsed_time * 60)}"
-            )
+        # if self.timer.elapsed_time:
+        #     self.ui.wpm_label.config(
+        #         text=f"wpm: {int(self.correct_words/self.timer.elapsed_time * 60)}"
+        #     )
+
+        self.ui.update_wpm(self.correct_words, self.timer.elapsed_time)
 
     def update_status_and_get_next_word(self, _event=None):
         self.update_status()

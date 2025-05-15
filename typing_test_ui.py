@@ -48,3 +48,15 @@ class TypingTestUI:
 
     def clear_input(self):
         self.input.delete(0, END)
+
+    def display_success(self):
+        self.status_label.config(image=self.green_check)
+
+    def display_fail(self):
+        self.status_label.config(image=self.red_X)
+
+    def update_wpm(self, score: int, elapsed_time: int):
+        if not score or not elapsed_time:
+            self.wpm_label.config(text=f"wpm: 0")
+
+        self.wpm_label.config(text=f"wpm: {score/elapsed_time * 60}")
