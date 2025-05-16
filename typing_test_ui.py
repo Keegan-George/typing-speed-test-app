@@ -59,4 +59,5 @@ class TypingTestUI:
         if not score or not elapsed_time:
             self.wpm_label.config(text=f"wpm: 0")
 
-        self.wpm_label.config(text=f"wpm: {score/elapsed_time * 60}")
+        else:
+            self.wpm_label.config(text=f"wpm: {score/elapsed_time * 60}")
