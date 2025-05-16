@@ -1,10 +1,10 @@
 from config import TEST_DURATION
-from tkinter import Tk, Label
+from tkinter import Tk
 
 
 class CountdownTimer:
     """
-    Track and display the remaining time in the speed test.
+    Class for managing the typing test countdown timer. 
     """
 
     def __init__(self, root: Tk, update_timer_callback):
@@ -15,6 +15,9 @@ class CountdownTimer:
         self.after_id = None
 
     def tick(self):
+        """
+        Decrements the timer by 1 each second.
+        """
         if self.count < 0:
             self.root.unbind("<space>")
             self.root.after_cancel(self.after_id)
@@ -28,5 +31,8 @@ class CountdownTimer:
             self.after_id = self.root.after(1000, self.tick)
 
     def start(self, _event=None):
+        """
+        Start the timer.
+        """
         self.root.unbind("<Key>")
         self.tick()

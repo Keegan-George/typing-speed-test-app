@@ -23,10 +23,16 @@ class TypingSpeedTest:
         self.window.mainloop()
 
     def next_word(self, _event=None):
+        """
+        Call the ui function to display the next word. 
+        """
         self.ui.display_word(self.word_bank.get_random_word())
         self.ui.clear_input()
 
     def update_score(self, _event=None):
+        """
+        Call the ui functions to update the score and wpm. 
+        """
         if self.word_bank.get_current_word() == self.ui.get_input_text():
             self.correct_words += 1
             self.ui.display_success()
@@ -37,5 +43,8 @@ class TypingSpeedTest:
         self.ui.update_wpm(self.correct_words, self.timer.elapsed_time)
 
     def update_score_and_get_next_word(self, _event=None):
+        """
+        Combine updating the score and getting the next word into a single call. 
+        """
         self.update_score()
         self.next_word()

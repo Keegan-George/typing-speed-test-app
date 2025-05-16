@@ -21,7 +21,7 @@ class WordBank:
 
     def get_random_word(self) -> str:
         """
-        Get and return a random word from the word list.
+        Return a new random word and set the current word. 
         """
         self.current_word = choice(self.words)
         return self.current_word
