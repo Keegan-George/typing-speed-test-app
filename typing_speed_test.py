@@ -10,7 +10,7 @@ class TypingSpeedTest:
         self.window = Tk()
         self.word_bank = WordBank()
         self.ui = TypingTestUI(self.window)
-        self.timer = CountdownTimer(self.window, self.ui.timer_label)
+        self.timer = CountdownTimer(self.window, self.ui.update_timer)
 
         # key bindings
         self.window.bind("<Key>", self.timer.start)

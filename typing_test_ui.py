@@ -64,3 +64,6 @@ class TypingTestUI:
 
     def get_input_text(self):
         return self.input.get()[:-1]
+
+    def update_timer(self, minutes: int, seconds: int):
+        self.timer_label.config(text=f"{minutes:02d}:{seconds:02d}")

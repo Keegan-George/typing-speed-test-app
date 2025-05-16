@@ -7,10 +7,10 @@ class CountdownTimer:
     Track and display the remaining time in the speed test.
     """
 
-    def __init__(self, root: Tk, timer_label: Label):
+    def __init__(self, root: Tk, update_timer_callback):
         self.count = TEST_DURATION
         self.root = root
-        self.timer_label = timer_label
+        self.update_timer_callback = update_timer_callback
         self.elapsed_time = 0
         self.after_id = None
 
@@ -22,7 +22,7 @@ class CountdownTimer:
         else:
             self.min = self.count // 60
             self.sec = self.count % 60
-            self.timer_label.config(text=f"{self.min:02d}:{self.sec:02d}")
+            self.update_timer_callback(self.min, self.sec)
             self.count -= 1
             self.elapsed_time = TEST_DURATION - self.count
             self.after_id = self.root.after(1000, self.tick)
