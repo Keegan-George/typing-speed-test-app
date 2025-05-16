@@ -88,7 +88,7 @@ class TypingTestUI:
             self.wpm_label.config(text=f"wpm: 0")
 
         else:
-            self.wpm_label.config(text=f"wpm: {score/elapsed_time * 60}")
+            self.wpm_label.config(text=f"wpm: {score/elapsed_time * 60:.1f}")
 
     def get_input_text(self):
         """

@@ -4,7 +4,7 @@ from tkinter import Tk
 
 class CountdownTimer:
     """
-    Class for managing the typing test countdown timer. 
+    Class for managing the typing test countdown timer.
     """
 
     def __init__(self, root: Tk, update_timer_callback):
