@@ -10,7 +10,7 @@ class WordBank:
     def __init__(self):
         self.words = self.create_word_list()
         self.current_word = None
-        self.get_word()
+        self.get_random_word()
 
     def create_word_list(self) -> list[str]:
         """
@@ -19,9 +19,15 @@ class WordBank:
         with open(WORD_FILE_PATH) as words_file:
             return words_file.read().split()
 
-    def get_word(self) -> str:
+    def get_random_word(self) -> str:
         """
-        Return a random word from the word list.
+        Get and return a random word from the word list.
         """
         self.current_word = choice(self.words)
+        return self.current_word
+
+    def get_current_word(self):
+        """
+        Return the current word.
+        """
         return self.current_word
